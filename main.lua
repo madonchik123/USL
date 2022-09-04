@@ -156,7 +156,7 @@ Tab:Textbox{
         end)
 
         local name = game:GetService('HttpService'):UrlEncode(Value)
-            for _, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/search?q=" ..name))) do
+            for _, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/search?q=" ..name))) do
                for z,c in pairs(v['scripts']) do
                     if getgenv().showuniversal == false then
                     if c['game']['name'] ~= "Universal Script 📌" then
@@ -168,17 +168,18 @@ Tab:Textbox{
                     	Callback = function(value) 
                             if value == "Preview Script" then
                                     if not info.Enabled then
+                                        local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))
                                         if string.find(c['game']['imageUrl'],"/images") then
                                         img.Image = save_image("https://scriptblox.com"..c['game']['imageUrl'])
                                         else
                                         img.Image = save_image(c['game']['imageUrl'])    
                                         end
-                                        desc.Text = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['features']
+                                        desc.Text = newapi['script']['features']  
                                         download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
-                                        if game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['verified'] == true then
-                                        title.Text = c['title'].." Is Verified and Made By "..game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['owner']['username']    
+                                        if newapi['script']['verified'] == true then
+                                        title.Text =  c['title'].." Is Verified and Made By "..newapi['script']['owner']['username']    
                                         else
-                                        title.Text = c['title'].." Made By "..game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['owner']['username']    
+                                        title.Text = c['title'].." Made By "..newapi['script']['owner']['username']    
                                         end
                                         info.Enabled = true
                                     end
