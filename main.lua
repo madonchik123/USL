@@ -5,7 +5,7 @@ local GUI = Mercury:Create{
     Name = "Scriptblox/rbxscript Powered Script Searcher",
     Size = UDim2.fromOffset(600, 400),
     Theme = Mercury.Themes.Dark,
-    Link = "https://github.com/deeeity/mercury-lib"
+    Link = "https://scriptblox.com"
 }
 
 if game.CoreGui:FindFirstChild("info") then
