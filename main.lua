@@ -2,7 +2,7 @@ getgenv().showuniversal = false
 
 local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 local GUI = Mercury:Create{
-    Name = "Scriptblox/Rbxscripts Powered Script Searcher",
+    Name = "Scriptblox/Rbxscript Powered Script Searcher",
     Size = UDim2.fromOffset(600, 400),
     Theme = Mercury.Themes.Dark,
     Link = "https://github.com/deeeity/mercury-lib"
@@ -262,7 +262,7 @@ Tab:Toggle{
 	 end
 }
 Tab2:Textbox{
-	Name = "Search Bar Rbxscripts",
+	Name = "Search Bar Rbxscript",
 	Callback = function(Value)
 	    spawn(function()
                 for z,x in pairs(game:GetService("CoreGui").ScreenGui:GetChildren()) do
