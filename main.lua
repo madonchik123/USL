@@ -127,17 +127,17 @@ end
 
 
 local Tab = GUI:Tab{
-	Name = "Scriptblox",
+	Name = "ScriptBlox",
 	Icon = save_image("https://cdn.discordapp.com/icons/954089188825894943/372ca12b35bd2fddeed6c70a44a48a6f.webp?size=128")
 }
 local Tab2 = GUI:Tab{
-	Name = "Rbxscript",
+	Name = "RbxScript",
 	Icon = save_image("https://rbxscript.com/images/logo.png")
 }
 
 
 Tab:Textbox{
-	Name = "Search Bar Scriptblox",
+	Name = "Search Bar ScriptBlox",
 	Callback = function(Value)
     spawn(function()
         for z,x in pairs(game:GetService("CoreGui").ScreenGui:GetChildren()) do
@@ -263,7 +263,7 @@ Tab:Toggle{
 	 end
 }
 Tab2:Textbox{
-	Name = "Search Bar rbxscript",
+	Name = "Search Bar RbxScript",
 	Callback = function(Value)
 	    spawn(function()
                 for z,x in pairs(game:GetService("CoreGui").ScreenGui:GetChildren()) do
