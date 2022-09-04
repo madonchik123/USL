@@ -127,11 +127,11 @@ end
 
 
 local Tab = GUI:Tab{
-	Name = "ScriptBlox",
+	Name = "Scriptblox",
 	Icon = save_image("https://cdn.discordapp.com/icons/954089188825894943/372ca12b35bd2fddeed6c70a44a48a6f.webp?size=128")
 }
 local Tab2 = GUI:Tab{
-	Name = "RbxScript",
+	Name = "rbxscript",
 	Icon = save_image("https://rbxscript.com/images/logo.png")
 }
 
@@ -145,7 +145,7 @@ Tab:Textbox{
             pcall(function()
             if v:IsA("TextButton") and v.TextLabel.Text ~= "Show Universal Scripts" and v.Parent.Name == "ScrollingFrame" and not v:FindFirstChild("TextBox") then
                 for c,b in pairs(v.Parent:GetChildren()) do
-                    if b:IsA("TextButton") and b:FindFirstChild("TextBox") and b.TextLabel.Text == "Search Bar Scriptblox" then
+                    if b:IsA("TextButton") and b:FindFirstChild("TextBox") and b.TextLabel.Text == "Search Bar ScriptBlox" then
                     v:Destroy()
                     end
                 end
