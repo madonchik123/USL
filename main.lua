@@ -127,11 +127,11 @@ end
 
 
 local Tab = GUI:Tab{
-	Name = "Scriptblox",
+	Name = "ScriptBlox",
 	Icon = save_image("https://cdn.discordapp.com/icons/954089188825894943/372ca12b35bd2fddeed6c70a44a48a6f.webp?size=128")
 }
 local Tab2 = GUI:Tab{
-	Name = "rbxscript",
+	Name = "RbxScript",
 	Icon = save_image("https://rbxscript.com/images/logo.png")
 }
 
