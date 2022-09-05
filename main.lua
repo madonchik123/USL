@@ -184,9 +184,11 @@ Tab:Textbox{
                     	Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                     	StartingText = "Select...",
                     	Description = nil,
-                    	Items = {"Execute","Preview Script"},
+                    	Items = {"Execute","Copy","Preview Script"},
                     	Callback = function(value) 
-                            if value == "Preview Script" then
+                            if value == "Copy" then
+                                setclipboard(c['script'])
+                            elseif value == "Preview Script" then
                                     if not info.Enabled then
                                         local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))
                                         if string.find(c['game']['imageUrl'],"/images") then
@@ -236,9 +238,12 @@ Tab:Textbox{
                     	Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                     	StartingText = "Select...",
                     	Description = nil,
-                    	Items = {"Execute","Preview Script"},
+                    	Items = {"Execute","Copy","Preview Script"},
                     	Callback = function(value) 
-                            if value == "Preview Script" then
+                            if value == "Copy" then
+                                setclipboard(c['script'])
+                                
+                            elseif value == "Preview Script" then
                                     if not info.Enabled then
                                         local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))
                                         if string.find(c['game']['imageUrl'],"/images") then
@@ -329,9 +334,12 @@ Tab2:Textbox{
                 	Name = " "..v1.title .. '\nViews: ' .. formatNumber(v1.download_script),
                 	StartingText = "Select...",
                 	Description = nil,
-                	Items = {"Execute", "Preview Script"},
+                	Items = {"Execute","Copy", "Preview Script"},
                 	Callback = function(value) 
-                	   if value == "Preview Script" then
+                	   if value == "Copy" then
+                	       local script = game:HttpGet("https://WheatHub.kelprepl.repl.co/get_script?url="..v1.url)
+                	       setclipboard(script)
+                	   elseif value == "Preview Script" then
                             if not info.Enabled then
                                 img.Image = save_image(v1.image_url)
                                 desc.Text = v1.description
