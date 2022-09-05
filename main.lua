@@ -44,7 +44,7 @@ img.Name = "img"
 img.Parent = main
 img.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 img.BorderSizePixel = 0
-img.Position = UDim2.new(0.258523524, 0, 0.21042484, 0)
+img.Position = UDim2.new(0.258523524, 0, 0.16042484, 0)
 img.Size = UDim2.new(0.370301604, 0, 0.447574109, 0)
 img.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
 
@@ -52,8 +52,8 @@ desc.Name = "desc"
 desc.Parent = main
 desc.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 desc.BorderSizePixel = 0
-desc.Position = UDim2.new(0.258523524, 0, 0.6579988, 0)
-desc.Size = UDim2.new(0.370301634, 0, 0.165781249, 0)
+desc.Position = UDim2.new(0.258523524, 0, 0.6079988, 0)
+desc.Size = UDim2.new(0.370301634, 0, 0.285781249, 0)
 desc.Font = Enum.Font.Ubuntu
 desc.Text = "1"
 desc.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -66,7 +66,7 @@ download.Name = "download"
 download.Parent = main
 download.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 download.BackgroundTransparency = 0.500
-download.Position = UDim2.new(0.505391181, 0, 0.631144404, 0)
+download.Position = UDim2.new(0.505391181, 0, 0.581144404, 0)
 download.Size = UDim2.new(0.123433866, 0, 0.0255756583, 0)
 download.Font = Enum.Font.Roboto
 download.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -78,7 +78,7 @@ title.Name = "title"
 title.Parent = main
 title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 title.BackgroundTransparency = 0.500
-title.Position = UDim2.new(0.257906318, 0, 0.631144404, 0)
+title.Position = UDim2.new(0.257906318, 0, 0.581144404, 0)
 title.Size = UDim2.new(0.247484878, 0, 0.0255756583, 0)
 title.Font = Enum.Font.Roboto
 title.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -89,7 +89,7 @@ title.TextWrapped = true
 close.Name = "close"
 close.Parent = main
 close.BackgroundColor3 = Color3.fromRGB(255, 127, 127)
-close.Position = UDim2.new(0.61667639, 0, 0.194762692, 0)
+close.Position = UDim2.new(0.61667639, 0, 0.154762692, 0)
 close.Size = UDim2.new(0, 27, 0, 27)
 close.Font = Enum.Font.SourceSans
 close.Text = "X"
@@ -117,6 +117,16 @@ end
 
 local getfakeasset = getcustomasset or getsynasset
 
+local function checkifimageexists(url)
+    local success,f = pcall(function()
+      local img = game:HttpGetAsync("https://process.filestackapi.com/AhTgLagciQByzXpFGRI0Az/output=format:png/"..url)
+    end)   
+    if not success then
+    return false
+    else
+    return true
+    end
+end    
 local function save_image(url)
     local path = "UniversalSearcher/"
     local img = game:HttpGetAsync("https://process.filestackapi.com/AhTgLagciQByzXpFGRI0Az/output=format:png/"..url)
@@ -170,9 +180,13 @@ Tab:Textbox{
                                     if not info.Enabled then
                                         local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))
                                         if string.find(c['game']['imageUrl'],"/images") then
+                                        if checkifimageexists("https://scriptblox.com"..c['game']['imageUrl']) then
                                         img.Image = save_image("https://scriptblox.com"..c['game']['imageUrl'])
+                                        end
                                         else
+                                        if checkifimageexists(c['game']['imageUrl']) then
                                         img.Image = save_image(c['game']['imageUrl'])    
+                                        end
                                         end
                                         desc.Text = newapi['script']['features']  
                                         download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
@@ -216,9 +230,13 @@ Tab:Textbox{
                                     if not info.Enabled then
                                         local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))
                                         if string.find(c['game']['imageUrl'],"/images") then
+                                        if checkifimageexists("https://scriptblox.com"..c['game']['imageUrl']) then
                                         img.Image = save_image("https://scriptblox.com"..c['game']['imageUrl'])
+                                        end
                                         else
+                                        if checkifimageexists(c['game']['imageUrl']) then
                                         img.Image = save_image(c['game']['imageUrl'])    
+                                        end
                                         end
                                         desc.Text = newapi['script']['features']  
                                         download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
