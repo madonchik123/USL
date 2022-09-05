@@ -8,6 +8,34 @@ local GUI = Mercury:Create{
     Link = "https://scriptblox.com"
 }
 
+local HttpService = game:GetService("HttpService")
+
+
+local Abbreviations = {"k", "M", "B", "T", "Qa", "Qn", "Sx", "Sp", "Oc", "N"}
+
+local function formatNumber(Number, Decimals)
+	return math.floor(((Number < 1 and Number) or math.floor(Number) / 10 ^ (math.log10(Number) - math.log10(Number) % 3)) * 10 ^ (Decimals or 3)) / 10 ^ (Decimals or 3)..(Abbreviations[math.floor(math.log10(Number) / 3)] or "")
+end
+
+local getfakeasset = getcustomasset or getsynasset
+
+local function checkifimageexists(url)
+    local success,f = pcall(function()
+      local img = game:HttpGetAsync("https://process.filestackapi.com/AhTgLagciQByzXpFGRI0Az/output=format:png/"..url)
+    end)   
+    if not success then
+    return false
+    else
+    return true
+    end
+end    
+local function save_image(url)
+    local path = "UniversalSearcher/"
+    local img = game:HttpGetAsync("https://process.filestackapi.com/AhTgLagciQByzXpFGRI0Az/output=format:png/"..url)
+    local uuid = HttpService:GenerateGUID(false):gsub("-", ""):lower()
+    writefile(path .. uuid .. ".png", img)
+    return getfakeasset(path .. uuid .. ".png")
+end
 if game.CoreGui:FindFirstChild("info") then
     game.CoreGui["info"]:Destroy()
 end
@@ -21,6 +49,7 @@ makefolder("UniversalSearcher")
 local info = Instance.new("ScreenGui")
 local main = Instance.new("Frame")
 local img = Instance.new("ImageLabel")
+local verimg = Instance.new("ImageLabel")
 local desc = Instance.new("TextLabel")
 local download = Instance.new("TextLabel")
 local title = Instance.new("TextLabel")
@@ -47,6 +76,17 @@ img.BorderSizePixel = 0
 img.Position = UDim2.new(0.258523524, 0, 0.16042484, 0)
 img.Size = UDim2.new(0.370301604, 0, 0.447574109, 0)
 img.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+
+verimg.Visible = false
+verimg.Name = "verimg"
+verimg.Parent = main
+verimg.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+verimg.BorderSizePixel = 0
+verimg.Position = UDim2.new(0.257906318, 0, 0.558144404)
+verimg.Size = UDim2.new(0.02,0,0.025, 0)
+verimg.BackgroundTransparency = 1
+verimg.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+
 
 desc.Name = "desc"
 desc.Parent = main
@@ -106,35 +146,6 @@ close.MouseButton1Click:Connect(function()
     info.Enabled = false
 end)
 
-local HttpService = game:GetService("HttpService")
-
-
-local Abbreviations = {"k", "M", "B", "T", "Qa", "Qn", "Sx", "Sp", "Oc", "N"}
-
-local function formatNumber(Number, Decimals)
-	return math.floor(((Number < 1 and Number) or math.floor(Number) / 10 ^ (math.log10(Number) - math.log10(Number) % 3)) * 10 ^ (Decimals or 3)) / 10 ^ (Decimals or 3)..(Abbreviations[math.floor(math.log10(Number) / 3)] or "")
-end
-
-local getfakeasset = getcustomasset or getsynasset
-
-local function checkifimageexists(url)
-    local success,f = pcall(function()
-      local img = game:HttpGetAsync("https://process.filestackapi.com/AhTgLagciQByzXpFGRI0Az/output=format:png/"..url)
-    end)   
-    if not success then
-    return false
-    else
-    return true
-    end
-end    
-local function save_image(url)
-    local path = "UniversalSearcher/"
-    local img = game:HttpGetAsync("https://process.filestackapi.com/AhTgLagciQByzXpFGRI0Az/output=format:png/"..url)
-    local uuid = HttpService:GenerateGUID(false):gsub("-", ""):lower()
-    writefile(path .. uuid .. ".png", img)
-    return getfakeasset(path .. uuid .. ".png")
-end
-
 
 local Tab = GUI:Tab{
 	Name = "ScriptBlox",
@@ -144,7 +155,6 @@ local Tab2 = GUI:Tab{
 	Name = "RbxScript",
 	Icon = save_image("https://rbxscript.com/images/logo.png")
 }
-
 
 Tab:Textbox{
 	Name = "Search Bar ScriptBlox",
@@ -191,8 +201,10 @@ Tab:Textbox{
                                         desc.Text = newapi['script']['features']  
                                         download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
                                         if newapi['script']['verified'] == true then
-                                        title.Text =  c['title'].." Is Verified and Made By "..newapi['script']['owner']['username']    
+                                        verimg.Visible = true
+                                        title.Text =  c['title'].." Made By "..newapi['script']['owner']['username']    
                                         else
+                                        verimg.Visible = false
                                         title.Text = c['title'].." Made By "..newapi['script']['owner']['username']    
                                         end
                                         info.Enabled = true
@@ -241,8 +253,10 @@ Tab:Textbox{
                                         desc.Text = newapi['script']['features']  
                                         download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
                                         if newapi['script']['verified'] == true then
-                                        title.Text =  c['title'].." Is Verified and Made By "..newapi['script']['owner']['username']    
+                                        verimg.Visible = true
+                                        title.Text =  c['title'].." Made By "..newapi['script']['owner']['username']    
                                         else
+                                        verimg.Visible = false
                                         title.Text = c['title'].." Made By "..newapi['script']['owner']['username']    
                                         end
                                         info.Enabled = true
@@ -335,4 +349,5 @@ Tab2:Textbox{
             task.wait(0.1)
         end
     end)
-end}
+end}   
+verimg.Image = save_image("https://i.ibb.co/kGCRNsx/ye.png")
