@@ -21,7 +21,7 @@ local getfakeasset = getcustomasset or getsynasset
 
 local function checkifimageexists(url)
     local success,f = pcall(function()
-      local img = game:HttpGetAsync("https://process.filestackapi.com/AhTgLagciQByzXpFGRI0Az/output=format:png/"..url)
+      local img = game:HttpGet("https://process.filestackapi.com/AhTgLagciQByzXpFGRI0Az/output=format:png/"..url)
     end)   
     if not success then
     return false
@@ -31,7 +31,7 @@ local function checkifimageexists(url)
 end    
 local function save_image(url)
     local path = "UniversalSearcher/"
-    local img = game:HttpGetAsync("https://process.filestackapi.com/AhTgLagciQByzXpFGRI0Az/output=format:png/"..url)
+    local img = game:HttpGet("https://process.filestackapi.com/AhTgLagciQByzXpFGRI0Az/output=format:png/"..url)
     local uuid = HttpService:GenerateGUID(false):gsub("-", ""):lower()
     writefile(path .. uuid .. ".png", img)
     return getfakeasset(path .. uuid .. ".png")
