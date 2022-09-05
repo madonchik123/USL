@@ -184,7 +184,7 @@ Tab:Textbox{
                     	Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                     	StartingText = "Select...",
                     	Description = nil,
-                    	Items = {"Execute","Copy","Preview Script"},
+                    	Items = {"Execute","Preview Script","Copy"},
                     	Callback = function(value) 
                             if value == "Copy" then
                                 setclipboard(c['script'])
@@ -238,7 +238,7 @@ Tab:Textbox{
                     	Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                     	StartingText = "Select...",
                     	Description = nil,
-                    	Items = {"Execute","Copy","Preview Script"},
+                    	Items = {"Execute","Preview Script","Copy"},
                     	Callback = function(value) 
                             if value == "Copy" then
                                 setclipboard(c['script'])
@@ -334,7 +334,7 @@ Tab2:Textbox{
                 	Name = " "..v1.title .. '\nViews: ' .. formatNumber(v1.download_script),
                 	StartingText = "Select...",
                 	Description = nil,
-                	Items = {"Execute","Copy", "Preview Script"},
+                	Items = {"Execute", "Preview Script","Copy"},
                 	Callback = function(value) 
                 	   if value == "Copy" then
                 	       local script = game:HttpGet("https://WheatHub.kelprepl.repl.co/get_script?url="..v1.url)
