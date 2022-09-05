@@ -190,7 +190,7 @@ Tab:Textbox{
                                 setclipboard(c['script'])
                             elseif value == "Preview Script" then
                                     if not info.Enabled then
-                                        local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))
+                                        local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))
                                         if string.find(c['game']['imageUrl'],"/images") then
                                         if checkifimageexists("https://scriptblox.com"..c['game']['imageUrl']) then
                                         img.Image = save_image("https://scriptblox.com"..c['game']['imageUrl'])
@@ -201,7 +201,7 @@ Tab:Textbox{
                                         end
                                         end
                                         desc.Text = newapi['script']['features']  
-                                        download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
+                                        download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
                                         if newapi['script']['verified'] == true then
                                         verimg.Visible = true
                                         title.Text =  c['title'].." Made By "..newapi['script']['owner']['username']    
@@ -245,7 +245,7 @@ Tab:Textbox{
                                 
                             elseif value == "Preview Script" then
                                     if not info.Enabled then
-                                        local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))
+                                        local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))
                                         if string.find(c['game']['imageUrl'],"/images") then
                                         if checkifimageexists("https://scriptblox.com"..c['game']['imageUrl']) then
                                         img.Image = save_image("https://scriptblox.com"..c['game']['imageUrl'])
@@ -256,7 +256,7 @@ Tab:Textbox{
                                         end
                                         end
                                         desc.Text = newapi['script']['features']  
-                                        download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
+                                        download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
                                         if newapi['script']['verified'] == true then
                                         verimg.Visible = true
                                         title.Text =  c['title'].." Made By "..newapi['script']['owner']['username']    
