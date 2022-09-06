@@ -384,6 +384,7 @@ Tab:Textbox{
                                 end      
                     	end
                     }
+                    task.wait(0.1)
                     end
                     else
                         results = results + 1
@@ -443,6 +444,7 @@ Tab:Textbox{
                                 end      
                     	end
                     }
+                    task.wait(0.1)
                     end
                end
         end  
