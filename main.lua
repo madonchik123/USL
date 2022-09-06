@@ -1,3 +1,4 @@
+
 getgenv().showuniversal = false
 
 local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
@@ -177,7 +178,8 @@ Tab:Textbox{
         local results = 0
         local patchedresults = 0
         local name = game:GetService('HttpService'):UrlEncode(Value)
-            for _, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/search?q=" ..name))) do
+        local page = 1
+            for _, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/search?q=" ..name.."&page="..page))) do
                for z,c in pairs(v['scripts']) do
                     if getgenv().showuniversal == false then
                     if c['game']['name'] ~= "Universal Script 📌" then
@@ -298,7 +300,135 @@ Tab:Textbox{
                     end
                end
             end  
-            if results > 0 or patchedresults > 0 then
+    repeat 
+        wait()
+        page = page + 1
+        local currentresults = 0
+        for _, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/search?q=" ..name.."&page="..page))) do
+               for z,c in pairs(v['scripts']) do
+                    if getgenv().showuniversal == false then
+                    if c['game']['name'] ~= "Universal Script 📌" then
+                        results = results + 1
+                        currentresults = currentresults + 1
+                        if c['isPatched'] then
+                            patchedresults = patchedresults + 1
+                        end                          
+                    local MyDropdown = Tab:Dropdown{
+                    	Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
+                    	StartingText = "Select...",
+                    	Description = nil,
+                    	Items = {"Execute","Preview Script","Copy"},
+                    	Callback = function(value) 
+                            if value == "Copy" then
+                                setclipboard(c['script'])
+                            elseif value == "Preview Script" then
+                                    if not info.Enabled then
+                                        local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))
+                                        if string.find(c['game']['imageUrl'],"/images") then
+                                        if checkifimageexists("https://scriptblox.com"..c['game']['imageUrl']) then
+                                        img.Image = save_image("https://scriptblox.com"..c['game']['imageUrl'])
+                                        end
+                                        else
+                                        if checkifimageexists(c['game']['imageUrl']) then
+                                        img.Image = save_image(c['game']['imageUrl'])    
+                                        end
+                                        end
+                                        desc.Text = newapi['script']['features']  
+                                        download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
+                                        if newapi['script']['verified'] == true then
+                                        verimg.Visible = true
+                                        title.Text =  c['title'].." Made By "..newapi['script']['owner']['username']    
+                                        else
+                                        verimg.Visible = false
+                                        title.Text = c['title'].." Made By "..newapi['script']['owner']['username']    
+                                        end
+                                        info.Enabled = true
+                                    end
+                            elseif value == "Execute" then
+                                if c['isPatched'] then
+                                    GUI:Prompt{
+                                    	Followup = false,
+                                    	Title = "Warning!",
+                                    	Text = "This script is patched would you like to use it?",
+                                        	Buttons = {
+                                        		yes = function()
+                                        			loadstring(c['script'])()
+                                        		end;
+                                        		no = function()
+                                        			
+                                        		end;
+                                        	}
+                                        }
+                                    else
+                                   loadstring(c['script'])()
+                                    end    
+                                end      
+                    	end
+                    }
+                    end
+                    else
+                        results = results + 1
+                        currentresults = currentresults + 1
+                        if c['isPatched'] then
+                            patchedresults = patchedresults + 1
+                        end    
+                    local MyDropdown = Tab:Dropdown{
+                    	Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
+                    	StartingText = "Select...",
+                    	Description = nil,
+                    	Items = {"Execute","Preview Script","Copy"},
+                    	Callback = function(value) 
+                            if value == "Copy" then
+                                setclipboard(c['script'])
+                            elseif value == "Preview Script" then
+                                    if not info.Enabled then
+                                        local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))
+                                        if string.find(c['game']['imageUrl'],"/images") then
+                                        if checkifimageexists("https://scriptblox.com"..c['game']['imageUrl']) then
+                                        img.Image = save_image("https://scriptblox.com"..c['game']['imageUrl'])
+                                        end
+                                        else
+                                        if checkifimageexists(c['game']['imageUrl']) then
+                                        img.Image = save_image(c['game']['imageUrl'])    
+                                        end
+                                        end
+                                        desc.Text = newapi['script']['features']  
+                                        download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
+                                        if newapi['script']['verified'] == true then
+                                        verimg.Visible = true
+                                        title.Text =  c['title'].." Made By "..newapi['script']['owner']['username']    
+                                        else
+                                        verimg.Visible = false
+                                        title.Text = c['title'].." Made By "..newapi['script']['owner']['username']    
+                                        end
+                                        info.Enabled = true
+                                    end
+                            elseif value == "Execute" then
+                                if c['isPatched'] then
+                                    GUI:Prompt{
+                                    	Followup = false,
+                                    	Title = "Warning!",
+                                    	Text = "This script is patched would you like to use it?",
+                                    	Buttons = {
+                                    		yes = function()
+                                    			loadstring(c['script'])()
+                                    		end;
+                                    		no = function()
+                                    			
+                                    		end;
+                                    	}
+                                    }
+                                    else
+                                   loadstring(c['script'])()
+                                end    
+                                end      
+                    	end
+                    }
+                    end
+               end
+            end  
+    until currentresults == 0
+    if results > 0 or patchedresults > 0 then
             GUI:Prompt{
             Followup = false,
             Title = "Info!",
@@ -326,8 +456,9 @@ Tab:Textbox{
                     end;
                 }
             }            
-        end
+            end
 	end
+
 }
 Tab:Toggle{
 	Name = "Show Universal Scripts",
