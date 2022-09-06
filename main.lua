@@ -63,7 +63,7 @@ local info = Instance.new("ScreenGui")
 local main = Instance.new("Frame")
 local img = Instance.new("ImageLabel")
 local verimg = Instance.new("ImageLabel")
-local desc = Instance.new("TextLabel")
+local desc = Instance.new("TextBox")
 local download = Instance.new("TextLabel")
 local title = Instance.new("TextLabel")
 local close = Instance.new("TextButton")
@@ -103,6 +103,7 @@ verimg.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
 
 desc.Name = "desc"
 desc.Parent = main
+desc.ClearTextOnFocus = false
 desc.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 desc.BorderSizePixel = 0
 desc.Position = UDim2.new(0.258523524, 0, 0.6079988, 0)
