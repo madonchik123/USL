@@ -174,12 +174,13 @@ Tab:Textbox{
         end
         end
         end)
-
+        local results = 0
         local name = game:GetService('HttpService'):UrlEncode(Value)
             for _, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/search?q=" ..name))) do
                for z,c in pairs(v['scripts']) do
                     if getgenv().showuniversal == false then
                     if c['game']['name'] ~= "Universal Script 📌" then
+                        results = results + 1
                     local MyDropdown = Tab:Dropdown{
                     	Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                     	StartingText = "Select...",
@@ -222,7 +223,7 @@ Tab:Textbox{
                                         			loadstring(c['script'])()
                                         		end;
                                         		no = function()
-                                        			print("Declined")
+                                        			
                                         		end;
                                         	}
                                         }
@@ -234,6 +235,7 @@ Tab:Textbox{
                     }
                     end
                     else
+                        results = results + 1
                     local MyDropdown = Tab:Dropdown{
                     	Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                     	StartingText = "Select...",
@@ -242,7 +244,6 @@ Tab:Textbox{
                     	Callback = function(value) 
                             if value == "Copy" then
                                 setclipboard(c['script'])
-                                
                             elseif value == "Preview Script" then
                                     if not info.Enabled then
                                         local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))
@@ -277,7 +278,7 @@ Tab:Textbox{
                                     			loadstring(c['script'])()
                                     		end;
                                     		no = function()
-                                    			print("Declined")
+                                    			
                                     		end;
                                     	}
                                     }
@@ -289,7 +290,20 @@ Tab:Textbox{
                     }
                     end
                end
-            end  	    
+            end  
+            GUI:Prompt{
+            Followup = false,
+            Title = "Info!",
+            Text = "Found "..results.." Results on the Scriptblox",
+                Buttons = {
+                    ok = function()
+                        
+                    end;
+                    ok = function()
+                        
+                    end;
+                }
+            }    
 	end
 }
 Tab:Toggle{
@@ -319,10 +333,12 @@ Tab2:Textbox{
             end
 	    end)
         local v = Value
+        local results = 0
         pcall(function()
         local scripts_data = HttpService:JSONDecode(game:HttpGet("https://WheatHub.kelprepl.repl.co/search?game_name="..string.gsub(v," ", "%%20")))
         for i1, v1 in pairs(scripts_data) do
             if string.match(v1.title:lower(), "^"..v:lower()) then
+                results = results + 1
                 -- Tab:AddButton({
                 --     Name = v1.title .. ' | ' .. formatNumber(v1.download_script) .. " used",
                 --     Callback = function()
@@ -354,8 +370,20 @@ Tab2:Textbox{
                 	end
                 }
             end
-            task.wait(0.1)
         end
+            GUI:Prompt{
+            Followup = false,
+            Title = "Info!",
+            Text = "Found "..results.." Results on the RbxScript",
+                Buttons = {
+                    ok = function()
+                        
+                    end;
+                    ok = function()
+                        
+                    end;
+                }
+            }
     end)
 end}   
 verimg.Image = save_image("https://i.ibb.co/kGCRNsx/ye.png")
