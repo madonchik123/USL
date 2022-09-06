@@ -312,6 +312,7 @@ Tab:Textbox{
                     end
                end
             end  
+    if results ~= 0 then
     repeat 
         page = page + 1
         local currentresults = 0
@@ -439,6 +440,7 @@ Tab:Textbox{
                end
             end  
     until currentresults == 0
+    end
     if results > 0 or patchedresults > 0 then
             GUI:Prompt{
             Followup = false,
