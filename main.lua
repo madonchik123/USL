@@ -173,6 +173,7 @@ local Tab2 = GUI:Tab{
 Tab:Textbox{
 	Name = "Search Bar ScriptBlox",
 	Callback = function(Value)
+	    if Value == "" then return end
     spawn(function()
         for z,x in pairs(game:GetService("CoreGui").ScreenGui:GetChildren()) do
         for i,v in pairs(x:GetDescendants()) do
@@ -565,7 +566,7 @@ Tab2:Textbox{
             GUI:Prompt{
             Followup = false,
             Title = "Info!",
-            Text = "Found "..results.." Results on the RbxScript ",
+            Text = results.." Script(s) found ",
                 Buttons = {
                     ok = function()
                         
@@ -579,7 +580,7 @@ Tab2:Textbox{
             GUI:Prompt{
             Followup = false,
             Title = "Info!",
-            Text = "No Scripts Were Found try to search again or search on other site",
+            Text = "Script(s) not found try searching again or search on another site",
                 Buttons = {
                     ok = function()
                         
