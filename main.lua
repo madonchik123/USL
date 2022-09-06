@@ -301,7 +301,6 @@ Tab:Textbox{
                end
             end  
     repeat 
-        wait()
         page = page + 1
         local currentresults = 0
         for _, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/search?q=" ..name.."&page="..page))) do
