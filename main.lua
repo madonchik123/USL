@@ -8,7 +8,19 @@ local GUI = Mercury:Create{
     Theme = Mercury.Themes.Dark,
     Link = "https://scriptblox.com"
 }
-
+GUI:Prompt{
+Followup = false,
+Title = "Info!",
+Text = "Script May Cause Lags On Low-end devices",
+    Buttons = {
+        ok = function()
+        
+        end;
+        ok = function()
+            
+        end;
+    }
+}
 local HttpService = game:GetService("HttpService")
 
 
