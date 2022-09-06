@@ -2,7 +2,7 @@ getgenv().showuniversal = false
 
 local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 local GUI = Mercury:Create{
-    Name = "Scriptblox/rbxscript Powered Script Searcher",
+    Name = "ScriptBlox/RbxScript Powered Script Searcher",
     Size = UDim2.fromOffset(600, 400),
     Theme = Mercury.Themes.Dark,
     Link = "https://scriptblox.com"
@@ -175,12 +175,16 @@ Tab:Textbox{
         end
         end)
         local results = 0
+        local patchedresults = 0
         local name = game:GetService('HttpService'):UrlEncode(Value)
             for _, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/search?q=" ..name))) do
                for z,c in pairs(v['scripts']) do
                     if getgenv().showuniversal == false then
                     if c['game']['name'] ~= "Universal Script 📌" then
                         results = results + 1
+                        if c['isPatched'] then
+                            patchedresults = patchedresults + 1
+                        end                          
                     local MyDropdown = Tab:Dropdown{
                     	Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                     	StartingText = "Select...",
@@ -236,6 +240,9 @@ Tab:Textbox{
                     end
                     else
                         results = results + 1
+                        if c['isPatched'] then
+                            patchedresults = patchedresults + 1
+                        end    
                     local MyDropdown = Tab:Dropdown{
                     	Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                     	StartingText = "Select...",
@@ -291,10 +298,11 @@ Tab:Textbox{
                     end
                end
             end  
+            if results > 0 or patchedresults > 0 then
             GUI:Prompt{
             Followup = false,
             Title = "Info!",
-            Text = "Found "..results.." Results on the Scriptblox",
+            Text = "Found "..results.." Results on the Scriptblox and "..patchedresults.." is patched",
                 Buttons = {
                     ok = function()
                         
@@ -303,7 +311,22 @@ Tab:Textbox{
                         
                     end;
                 }
-            }    
+            }
+            else
+            GUI:Prompt{
+            Followup = false,
+            Title = "Info!",
+            Text = "No Scripts Were Found try to search again or search on other site",
+                Buttons = {
+                    ok = function()
+                        
+                    end;
+                    ok = function()
+                        
+                    end;
+                }
+            }            
+        end
 	end
 }
 Tab:Toggle{
@@ -370,11 +393,13 @@ Tab2:Textbox{
                 	end
                 }
             end
+            task.wait(0.1)
         end
+        if results > 0 then
             GUI:Prompt{
             Followup = false,
             Title = "Info!",
-            Text = "Found "..results.." Results on the RbxScript",
+            Text = "Found "..results.." Results on the RbxScript ",
                 Buttons = {
                     ok = function()
                         
@@ -384,6 +409,21 @@ Tab2:Textbox{
                     end;
                 }
             }
+            else
+            GUI:Prompt{
+            Followup = false,
+            Title = "Info!",
+            Text = "No Scripts Were Found try to search again or search on other site",
+                Buttons = {
+                    ok = function()
+                        
+                    end;
+                    ok = function()
+                        
+                    end;
+                }
+            }            
+        end
     end)
 end}   
 verimg.Image = save_image("https://i.ibb.co/kGCRNsx/ye.png")
