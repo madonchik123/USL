@@ -459,7 +459,7 @@ Tab:Textbox{
             GUI:Prompt{
             Followup = false,
             Title = "Info!",
-            Text = "Found "..results.." Results on the Scriptblox and "..patchedresults.." Patched scripts and "..universalresults.." Universal Scripts",
+            Text = results-patchedresults-universalresults.." Script(s) found \n "..patchedresults.." Patched script(s) found \n "..universalresults.." Universal script(s) found",
                 Buttons = {
                     ok = function()
                         
