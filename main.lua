@@ -321,6 +321,8 @@ Tab:Textbox{
     repeat 
         page = page + 1
         local currentresults = 0
+        local successed, returnedData = xpcall(function()
+    -- protected code
         for _, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/search?q=" ..name.."&page="..page))) do
                for z,c in pairs(v['scripts']) do
                     if getgenv().showuniversal == false then
@@ -443,14 +445,18 @@ Tab:Textbox{
                     }
                     end
                end
-            end  
+        end  
+    end, function() -- 1
+    return
+    
+    end)    
     until currentresults == 0
     end
     if results > 0 or patchedresults > 0 then
             GUI:Prompt{
             Followup = false,
             Title = "Info!",
-            Text = "Found "..results.." Results on the Scriptblox and "..patchedresults.." patched script and "..universalresults.." Universal Scripts",
+            Text = "Found "..results.." Results on the Scriptblox and "..patchedresults.." Patched scripts and "..universalresults.." Universal Scripts",
                 Buttons = {
                     ok = function()
                         
