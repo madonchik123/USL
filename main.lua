@@ -188,6 +188,7 @@ Tab:Textbox{
         end
         end)
         local results = 0
+        local universalresults = 0
         local patchedresults = 0
         local name = game:GetService('HttpService'):UrlEncode(Value)
         local page = 1
@@ -255,6 +256,9 @@ Tab:Textbox{
                     end
                     else
                         results = results + 1
+                        if c['game']['name'] == "Universal Script 📌" then
+                            universalresults = universalresults + 1
+                        end    
                         if c['isPatched'] then
                             patchedresults = patchedresults + 1
                         end    
@@ -446,7 +450,7 @@ Tab:Textbox{
             GUI:Prompt{
             Followup = false,
             Title = "Info!",
-            Text = "Found "..results.." Results on the Scriptblox and "..patchedresults.." is patched",
+            Text = "Found "..results.." Results on the Scriptblox and "..patchedresults.." patched script and "..universalresults.." Universal Scripts",
                 Buttons = {
                     ok = function()
                         
