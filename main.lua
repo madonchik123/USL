@@ -176,7 +176,7 @@ Tab:Textbox{
         for z,x in pairs(game:GetService("CoreGui").ScreenGui:GetChildren()) do
         for i,v in pairs(x:GetDescendants()) do
             pcall(function()
-            if v:IsA("TextButton") and v.TextLabel.Text ~= "Show Universal Scripts" and v.Parent.Name == "ScrollingFrame" and not v:FindFirstChild("TextBox") then
+            if v:IsA("TextButton") and v.TextLabel.Text ~= "Show Universal Scripts" and v.TextLabel.Text ~= "Show More then 20 Scripts (May Cause Lags)" and v.Parent.Name == "ScrollingFrame" and not v:FindFirstChild("TextBox") then
                 for c,b in pairs(v.Parent:GetChildren()) do
                     if b:IsA("TextButton") and b:FindFirstChild("TextBox") and b.TextLabel.Text == "Search Bar ScriptBlox" then
                     v:Destroy()
@@ -193,6 +193,7 @@ Tab:Textbox{
         local page = 1
             for _, v in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/search?q=" ..name.."&page="..page))) do
                for z,c in pairs(v['scripts']) do
+                   task.wait(0.1)
                     if getgenv().showuniversal == false then
                     if c['game']['name'] ~= "Universal Script 📌" then
                         results = results + 1
@@ -312,7 +313,7 @@ Tab:Textbox{
                     end
                end
             end  
-    if results ~= 0 then
+    if results ~= 0 and getgenv().showmore then
     repeat 
         page = page + 1
         local currentresults = 0
@@ -481,6 +482,14 @@ Tab:Toggle{
 	    getgenv().showuniversal = state
 	 end
 }
+Tab:Toggle{
+	Name = "Show More then 20 Scripts (May Cause Lags)",
+	StartingState = false,
+	Description = nil,
+	Callback = function(state)
+	    getgenv().showmore = state
+	 end
+}
 Tab2:Textbox{
 	Name = "Search Bar RbxScript",
 	Callback = function(Value)
@@ -488,7 +497,7 @@ Tab2:Textbox{
                 for z,x in pairs(game:GetService("CoreGui").ScreenGui:GetChildren()) do
                     for i,v in pairs(x:GetDescendants()) do
                         pcall(function()
-                        if v:IsA("TextButton") and v.TextLabel.Text ~= "Show Universal Scripts" and v.Parent.Name == "ScrollingFrame" and not v:FindFirstChild("TextBox") then
+                        if v:IsA("TextButton") and v.TextLabel.Text ~= "Show Universal Scripts" and v.TextLabel.Text ~= "Show More then 20 Scripts (May Cause Lags)" and v.Parent.Name == "ScrollingFrame" and not v:FindFirstChild("TextBox") then
                             for c,b in pairs(v.Parent:GetChildren()) do
                                 if b:IsA("TextButton") and b:FindFirstChild("TextBox") and b:FindFirstChild("TextButton") and not b.TextButton.Text == "Show Universal Scripts" then
                                 v:Destroy()
