@@ -593,10 +593,4 @@ Tab2:Textbox{
         end
     end)
 end}   
-GUI:Credit{
-	Name = "MaGiXx",
-	Description = "Gived me rbxscript api",
-	V3rm = "N/A",
-	Discord = "MaGiXx#6964"
-}
 verimg.Image = save_image("https://i.ibb.co/kGCRNsx/ye.png")
