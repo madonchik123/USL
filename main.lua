@@ -580,7 +580,7 @@ Tab2:Textbox{
             GUI:Prompt{
             Followup = false,
             Title = "Info!",
-            Text = "Script(s) not found try searching again or search on another site",
+            Text = "No Scripts Were Found try to search again or search on other site",
                 Buttons = {
                     ok = function()
                         
