@@ -10,7 +10,7 @@ local GUI = Mercury:Create{
 GUI:Prompt{
     Followup = false,
     Title = "Info!",
-    Text = "Script May Cause Lags On Low-end devices",
+    Text = "Update Log: Added Copy Game Link To Dropdown",
     Buttons = {
         ok = function()
 
@@ -206,10 +206,38 @@ Tab:Textbox{
                             Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                             StartingText = "Select...",
                             Description = nil,
-                            Items = {"Execute","Preview Script","Copy"},
+                            Items = {"Execute","Preview Script","Copy Game Link","Copy Script"},
                             Callback = function(value)
-                                if value == "Copy" then
+                                if value == "Copy Game Link" then
+                                    setclipboard("https://www.roblox.com/games/"..c['game']['gameId'])
+                                    GUI:Prompt{
+                                        Followup = false,
+                                        Title = "Info!",
+                                        Text = "Game Link Has Been Copied To Your Clipboard",
+                                        Buttons = {
+                                            ok = function()
+
+                                            end;
+                                            ok = function()
+
+                                            end;
+                                        }
+                                    }
+                                elseif value == "Copy Script" then
                                     setclipboard(c['script'])
+                                    GUI:Prompt{
+                                        Followup = false,
+                                        Title = "Info!",
+                                        Text = "Script Has Been Copied To Your Clipboard",
+                                        Buttons = {
+                                            ok = function()
+
+                                            end;
+                                            ok = function()
+
+                                            end;
+                                        }
+                                    }
                                 elseif value == "Preview Script" then
                                     if not info.Enabled then
                                         local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))
@@ -267,10 +295,38 @@ Tab:Textbox{
                         Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                         StartingText = "Select...",
                         Description = nil,
-                        Items = {"Execute","Preview Script","Copy"},
+                        Items = {"Execute","Preview Script","Copy Game Link","Copy Script"},
                         Callback = function(value)
-                            if value == "Copy" then
+                            if value == "Copy Game Link" then
+                                setclipboard("https://www.roblox.com/games/"..c['game']['gameId'])
+                                GUI:Prompt{
+                                    Followup = false,
+                                    Title = "Info!",
+                                    Text = "Game Link Has Been Copied To Your Clipboard",
+                                    Buttons = {
+                                        ok = function()
+
+                                        end;
+                                        ok = function()
+
+                                        end;
+                                    }
+                                }
+                            elseif value == "Copy Script" then
                                 setclipboard(c['script'])
+                                GUI:Prompt{
+                                    Followup = false,
+                                    Title = "Info!",
+                                    Text = "Script Has Been Copied To Your Clipboard",
+                                    Buttons = {
+                                        ok = function()
+
+                                        end;
+                                        ok = function()
+
+                                        end;
+                                    }
+                                }
                             elseif value == "Preview Script" then
                                 if not info.Enabled then
                                     local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))
@@ -284,7 +340,7 @@ Tab:Textbox{
                                         end
                                     end
                                     desc.Text = newapi['script']['features']
-                                    download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
+                                    download.Text = formatNumber(c['views']) .. " Views and "..newapi['script']['likeCount'].." Likes"
                                     if newapi['script']['verified'] == true then
                                         verimg.Visible = true
                                         title.Text =  c['title'].." Made By "..newapi['script']['owner']['username']
@@ -337,10 +393,38 @@ Tab:Textbox{
                                         Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                                         StartingText = "Select...",
                                         Description = nil,
-                                        Items = {"Execute","Preview Script","Copy"},
+                                        Items = {"Execute","Preview Script","Copy Game Link","Copy Script"},
                                         Callback = function(value)
-                                            if value == "Copy" then
+                                            if value == "Copy Game Link" then
+                                                setclipboard("https://www.roblox.com/games/"..c['game']['gameId'])
+                                                GUI:Prompt{
+                                                    Followup = false,
+                                                    Title = "Info!",
+                                                    Text = "Game Link Has Been Copied To Your Clipboard",
+                                                    Buttons = {
+                                                        ok = function()
+
+                                                        end;
+                                                        ok = function()
+
+                                                        end;
+                                                    }
+                                                }
+                                            elseif value == "Copy Script" then
                                                 setclipboard(c['script'])
+                                                GUI:Prompt{
+                                                    Followup = false,
+                                                    Title = "Info!",
+                                                    Text = "Script Has Been Copied To Your Clipboard",
+                                                    Buttons = {
+                                                        ok = function()
+
+                                                        end;
+                                                        ok = function()
+
+                                                        end;
+                                                    }
+                                                }
                                             elseif value == "Preview Script" then
                                                 if not info.Enabled then
                                                     local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))
@@ -354,7 +438,7 @@ Tab:Textbox{
                                                         end
                                                     end
                                                     desc.Text = newapi['script']['features']
-                                                    download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
+                                                    download.Text = formatNumber(c['views']) .. " Views and "..newapi['script']['likeCount'].." Likes"
                                                     if newapi['script']['verified'] == true then
                                                         verimg.Visible = true
                                                         title.Text =  c['title'].." Made By "..newapi['script']['owner']['username']
@@ -397,10 +481,38 @@ Tab:Textbox{
                                     Name = c['game']['name'].." ["..c['title'] .. '] \nViews: ' .. formatNumber(c['views']),
                                     StartingText = "Select...",
                                     Description = nil,
-                                    Items = {"Execute","Preview Script","Copy"},
+                                    Items = {"Execute","Preview Script","Copy Game Link","Copy Script"},
                                     Callback = function(value)
-                                        if value == "Copy" then
+                                        if value == "Copy Game Link" then
+                                            setclipboard("https://www.roblox.com/games/"..c['game']['gameId'])
+                                            GUI:Prompt{
+                                                Followup = false,
+                                                Title = "Info!",
+                                                Text = "Game Link Has Been Copied To Your Clipboard",
+                                                Buttons = {
+                                                    ok = function()
+
+                                                    end;
+                                                    ok = function()
+
+                                                    end;
+                                                }
+                                            }
+                                        elseif value == "Copy Script" then
                                             setclipboard(c['script'])
+                                            GUI:Prompt{
+                                                Followup = false,
+                                                Title = "Info!",
+                                                Text = "Script Has Been Copied To Your Clipboard",
+                                                Buttons = {
+                                                    ok = function()
+
+                                                    end;
+                                                    ok = function()
+
+                                                    end;
+                                                }
+                                            }
                                         elseif value == "Preview Script" then
                                             if not info.Enabled then
                                                 local newapi = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))
@@ -414,7 +526,7 @@ Tab:Textbox{
                                                     end
                                                 end
                                                 desc.Text = newapi['script']['features']
-                                                download.Text = formatNumber(c['views']) .. " Views and "..game:GetService("HttpService"):JSONDecode(game:HttpGet("https://www.scriptblox.com/api/script/"..c['slug']))['script']['likeCount'].." Likes"
+                                                download.Text = formatNumber(c['views']) .. " Views and "..newapi['script']['likeCount'].." Likes"
                                                 if newapi['script']['verified'] == true then
                                                     verimg.Visible = true
                                                     title.Text =  c['title'].." Made By "..newapi['script']['owner']['username']
@@ -539,9 +651,9 @@ Tab2:Textbox{
                         Name = " "..v1.title .. '\nViews: ' .. formatNumber(v1.download_script),
                         StartingText = "Select...",
                         Description = nil,
-                        Items = {"Execute", "Preview Script","Copy"},
+                        Items = {"Execute", "Preview Script","Copy Script"},
                         Callback = function(value)
-                            if value == "Copy" then
+                            if value == "Copy Script" then
                                 local script = game:HttpGet("https://WheatHub.kelprepl.repl.co/get_script?url="..v1.url)
                                 setclipboard(script)
                             elseif value == "Preview Script" then
