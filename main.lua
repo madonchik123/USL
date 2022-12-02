@@ -10,7 +10,7 @@ local GUI = Mercury:Create{
 GUI:Prompt{
     Followup = false,
     Title = "Info!",
-    Text = "Update Log: Added Copy Game Link To Dropdown",
+    Text = "Update Log: Changed ScriptBlox Logo to winter themed one",
     Buttons = {
         ok = function()
 
