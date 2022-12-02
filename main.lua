@@ -162,7 +162,7 @@ end)
 
 local Tab = GUI:Tab{
     Name = "ScriptBlox",
-    Icon = save_image("https://cdn.discordapp.com/icons/954089188825894943/372ca12b35bd2fddeed6c70a44a48a6f.webp?size=128")
+    Icon = save_image("https://cdn.discordapp.com/icons/954089188825894943/6b54fd0e58e6a110e07cf1da6ebbe2ae.webp?size=96")
 }
 local Tab2 = GUI:Tab{
     Name = "RbxScript",
